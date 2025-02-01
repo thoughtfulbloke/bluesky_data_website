@@ -1,0 +1,30 @@
+[
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "The about page really should include enough useful context about who and what you are doing to distinguish you from some kind of scammer."
+  },
+  {
+    "objectID": "results.html",
+    "href": "results.html",
+    "title": "Results of help",
+    "section": "",
+    "text": "This shows all posts for #rstats, #dataBS, and #dataRescue (as example keywords) that contain the text terms got, helped, scraped, mirrored, downloaded, copied (as examples of relevent terms in a time sensitive emergency).\nThis is an example of a multiple tags / multiple accompanying words aggregation."
+  },
+  {
+    "objectID": "requests.html",
+    "href": "requests.html",
+    "title": "Requests for help",
+    "section": "",
+    "text": "This shows all posts for #rstats, #dataBS, and #dataRescue (as example keywords) that contain the text terms get, help, can, scrape, mirror, download, copy (as examples of relevent terms in a time sensitive emergency).\nThis is an example of a multiple tags / multiple accompanying words aggregation."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Emergency website coordination via Bluesky",
+    "section": "",
+    "text": "This is an example of a data driven website being generated from Bluesky hashtag posts to hypothetically let people get aggregate view of requests for help and responses.\nThe starting page (this one) should have and explanation like…\nEvery few hours a script automatically draws the lasts posts with particular hashtags (in this case posts with #rstats, #dataBS, and #dataRescue) then summarise those posts that seem to be looking for help (by containing the keywords (in this case) get, help, can, scrape, mirror, download, copy) in the requests page, while the results page containing posts that seem to be notifications of work (got, backed up, mirrored, scraped, downloaded, recorded)\nThe index page may need to be renamed to an appropriate start page for whatever hosts the site.\nKnowing the last updated time can also be very important, and that might be done from the last_updated variable stored in the datavars.txt file in the Data folder.\nSo extracting that lets you write inline uses of it such as “the site was last updated at 2025-02-01 08:31:52 UTC\nIf you are just aggregating the desired hashtags, without needing the additional subsetting of the data, you can put all the posts on a table here"
+  }
+]

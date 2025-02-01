@@ -1,2 +1,63 @@
-# bluesky_data_website
-Creating a data driven website powered by Bluesky hashtags
+# README
+David Hood
+
+This is a proof-of-concept/ outline-of-project/ quick-and-rough-template
+for a data drive website for aggregating and displaying information from
+Bluesky posts.
+
+In the assumed situation that a time sensitive event is occuring that
+people are trying to coordinate and cooperate over a range of hastags,
+this provides and aggregate summary of the posts within a specified time
+period, with links back to the original post.
+
+For that set of data it also creates a couple of extra pages with
+different subsets of the data to demonstrate using the text in the posts
+to highlight only a subset of post activity.
+
+What this project does not include are my credientials for searching
+Bluesky (used with the bskyr R package). You would need to store your
+own App password on the machine doing the work, making it available to
+R.
+
+For setting up, the text on the site .qmd quarto pages controls the text
+on the site. The data driven stuff stems from the file datavars.txt in
+the Data folder. This file updates whenever the site is updated, but
+needs to be customised on first run:
+
+- last_update should initially be set to the UTC datetime you want to
+  search back to
+- prior_update honestly doesn’t matter as I changed my approach, but you
+  can set it to an older datetime
+- or_search_string is a comma seperated (or, additive) list of hastags
+  you are using to form the basis of the data
+- estimate_hash_limit is what you think is a reasonable number of
+  maximum posts to capture for each hastag given the frequency you set
+  the site to update.
+
+Automating the site (after being sure it has access to an app password)
+is a matter of running the \_build_site.R script however often you want
+to update the site. This downloads (and adds to any existing) posts to a
+posts.csv file in the Data folder, and updates the datavars.txt file
+with when it was last run.
+
+As currently written, it makes a local copy of the site in the \_site
+folder, but does not copy/ upload that site to anywhere. There are
+several options round this - github, quarto.pub, etc and people could
+use their preferred method, either adding it via R commands to
+\_build_site.R or subsequently via whatever automated control is
+triggering the script.
+
+I figure the hypothetical user is an R user with enough experience to
+have used bskyr, used quarto, to modify the \_quarto.yml for the overall
+site generation settings, set Data/datavars.txt, and set a public
+display location. But such a user would be up and running in a very
+short length of time.
+
+It also occurs to me, in more precendented times, this kind of thing
+would be handy for spreading a conference Blueksy hashtag discussion to
+a wider audience. Potentially, setting up the data driven site and link
+to it from elsewhere.
+
+Officially, this project is released under a MIT licence so people can
+go do whatever they like with it. Be free. What you do with it is not my
+responsibility.

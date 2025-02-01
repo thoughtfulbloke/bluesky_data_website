@@ -1,0 +1,39 @@
+---
+title: "Requests for help"
+execute:
+  message: false
+  warning: false
+  echo: false
+---
+
+This shows all posts for #rstats, #dataBS, and #dataRescue (as example keywords) that contain the text terms get, help, can, scrape, mirror, download, copy (as examples of relevent terms in a time sensitive emergency).
+
+This is an example of a multiple tags / multiple accompanying words aggregation.
+
+```{r}
+library(DT)
+library(dplyr)
+
+```
+
+```{r}
+post_data <- read.csv("Data/posts.csv", header = FALSE)
+names(post_data) <- c("text", "created_at", "author", "uri", "replies", "reposts")
+patterns <- c("get ", "help[^e]", "can ","scrape ","scraping ", "mirror ","mirroring ","download ","downloading ", "copy ","copying ", "rescue")
+
+position_list <- unique(unlist(sapply(patterns,
+                               function(y){grep(pattern=y,
+                                                post_data$text)})))
+post_subset <- post_data[position_list,]
+post_subset$url <- paste0("https://bsky.app/profile/",
+                         post_subset$author,"/post/",
+                         gsub(".*/","",post_subset$uri))
+
+post_subset |> 
+  mutate(link = paste0("<A HREF='", url, "'>Link</A>")) |> 
+  select(author,created_at,text,link) |> 
+  arrange(desc(created_at)) |>  distinct() |>
+  datatable(escape=FALSE)
+
+
+```

@@ -1,0 +1,46 @@
+---
+title: "Emergency website coordination via Bluesky "
+execute:
+  message: false
+  warning: false
+  echo: false
+---
+
+This is an example of a data driven website being generated from Bluesky hashtag posts to hypothetically let people get aggregate view of requests for help and responses.
+
+The starting page (this one) should have and explanation like...
+
+Every few hours a script automatically draws the lasts posts with particular hashtags (in this case posts with #rstats, #dataBS, and #dataRescue) then summarise those posts that seem to be looking for help (by containing the keywords (in this case) get, help, can, scrape, mirror, download, copy) in the requests page, while the results page containing posts that seem to be notifications of work (got, backed up, mirrored, scraped, downloaded, recorded)
+
+The index page may need to be renamed to an appropriate start page for whatever hosts the site.
+
+Knowing the last updated time can also be very important, and that might be done from the last_updated variable stored in the datavars.txt file in the Data folder.
+
+```{r}
+library(lubridate)
+source("R/update_site_data.R")
+named_vars <- global_defaults("Data/datavars.txt")
+latest_Datetime <- as.character(ymd_hms(named_vars[["last_update"]], tz="UTC"))
+```
+
+So extracting that lets you write inline uses of it such as "the site was last updated at `r latest_Datetime` UTC
+
+If you are just aggregating the desired hashtags, without needing the additional subsetting of the data, you can put all the posts on a table here
+
+```{r}
+library(DT)
+library(dplyr)
+
+post_data <- read.csv("Data/posts.csv", header = FALSE)
+names(post_data) <- c("text", "created_at", "author", "uri", "replies", "reposts")
+post_data$url <- paste0("https://bsky.app/profile/",
+                         post_data$author,"/post/",
+                         gsub(".*/","",post_data$uri))
+
+post_data |> 
+  mutate(link = paste0("<A HREF='", url, "'>Link</A>")) |> 
+  select(author,created_at,text,link) |> 
+  arrange(desc(created_at)) |>  distinct() |>
+  datatable(escape=FALSE)
+
+```
